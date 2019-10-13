@@ -19,7 +19,7 @@ const App = () => {
     );
     const data = await response.json();
     setRecipies(data.hits);
-    console.log(data.hits);
+    //console.log(data.hits);
   };
 
   const updateSearch = e => {
@@ -37,6 +37,7 @@ const App = () => {
       <form onSubmit={getSearch} className="search-form">
         <input
           className="search-bar"
+          placeholder="search..."
           type="text"
           value={search}
           onChange={updateSearch}
@@ -45,13 +46,17 @@ const App = () => {
           Search
         </button>
       </form>
-      {recipies.map(recipe => (
-        <Recipe
-          title={recipe.recipe.label}
-          calories={recipe.recipe.calories}
-          image={recipe.recipe.image}
-        />
-      ))}
+      <div className="recipies">
+        {recipies.map(recipe => (
+          <Recipe
+            key={recipe.recipe.label}
+            title={recipe.recipe.label}
+            calories={recipe.recipe.calories}
+            image={recipe.recipe.image}
+            ingredients={recipe.recipe.ingredients}
+          />
+        ))}
+      </div>
     </div>
   );
 };
